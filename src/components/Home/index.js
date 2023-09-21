@@ -110,7 +110,9 @@ class Home extends Component {
                 <FailureCaption fontColor={isDarkTheme}>
                   Try different key words or remove search filter
                 </FailureCaption>
-                <RetryButton onClick={onClickRetry}>Retry</RetryButton>
+                <RetryButton type="button" onClick={onClickRetry}>
+                  Retry
+                </RetryButton>
               </FailureViewContainer>
             )}
           </HomeVideosContainer>
@@ -129,7 +131,6 @@ class Home extends Component {
         const onClickRetry = () => {
           this.getHomeVideos()
         }
-
         return (
           <FailureViewContainer>
             <FailureImage src={failureImage} alt="failure view" />
@@ -231,6 +232,7 @@ class Home extends Component {
                       onKeyDown={this.getFilteredVideos}
                     />
                     <SearchButton
+                      type="button"
                       onClick={this.onClickSearch}
                       data-testid="searchButton"
                     >

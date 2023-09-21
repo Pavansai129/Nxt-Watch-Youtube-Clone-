@@ -101,7 +101,9 @@ class Trending extends Component {
                 <FailureCaption fontColor={isDarkTheme}>
                   Try different keywords or remove search filter
                 </FailureCaption>
-                <RetryButton onClick={onClickRetry}>Retry</RetryButton>
+                <RetryButton type="button" onClick={onClickRetry}>
+                  Retry
+                </RetryButton>
               </FailureViewContainer>
             )}
           </TrendingVideosContainer>

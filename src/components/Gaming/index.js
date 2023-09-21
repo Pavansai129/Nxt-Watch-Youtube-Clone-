@@ -128,7 +128,9 @@ class Gaming extends Component {
               We are having some trouble to complete your request. Please try
               again.
             </FailureCaption>
-            <RetryButton onClick={onClickRetry}>Retry</RetryButton>
+            <RetryButton type="button" onClick={onClickRetry}>
+              Retry
+            </RetryButton>
           </FailureViewContainer>
         )
       }}

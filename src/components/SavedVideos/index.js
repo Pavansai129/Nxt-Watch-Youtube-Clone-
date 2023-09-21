@@ -55,7 +55,7 @@ const SavedVideos = () => (
                       No Saved Videos found
                     </FailureHeading>
                     <FailureCaption fontColor={isDarkTheme}>
-                      You can see your videos while watching them
+                      You can save your videos while watching them
                     </FailureCaption>
                   </FailureViewContainer>
                 )}
