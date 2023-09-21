@@ -33,7 +33,6 @@ class App extends Component {
       )
       this.setState({
         likedVideos: filteredLikedVideos,
-        // dislikedVideos: [...dislikedVideos, videoDetails],
       })
     } else {
       const filteredDislikedVideos = dislikedVideos.filter(
@@ -55,7 +54,6 @@ class App extends Component {
       )
       this.setState({
         dislikedVideos: filteredDislikedVideos,
-        // likedVideos: [...likedVideos, videoDetails],
       })
     } else {
       const filteredLikedVideos = likedVideos.filter(
