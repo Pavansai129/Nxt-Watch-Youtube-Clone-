@@ -13,17 +13,90 @@ import './App.css'
 
 // Replace your code here
 class App extends Component {
-  state = {isDarkTheme: false}
+  state = {
+    isDarkTheme: false,
+    likedVideos: [],
+    dislikedVideos: [],
+    savedVideos: [],
+  }
 
   changeTheme = () => {
     this.setState(prevState => ({isDarkTheme: !prevState.isDarkTheme}))
   }
 
+  updateLikedVideos = videoDetails => {
+    const {likedVideos, dislikedVideos} = this.state
+    const video = likedVideos.find(each => each.id === videoDetails.id)
+    if (video) {
+      const filteredLikedVideos = likedVideos.filter(
+        each => each.id !== videoDetails.id,
+      )
+      this.setState({
+        likedVideos: filteredLikedVideos,
+        // dislikedVideos: [...dislikedVideos, videoDetails],
+      })
+    } else {
+      const filteredDislikedVideos = dislikedVideos.filter(
+        each => each.id !== videoDetails.id,
+      )
+      this.setState({
+        likedVideos: [...likedVideos, videoDetails],
+        dislikedVideos: filteredDislikedVideos,
+      })
+    }
+  }
+
+  updateDislikedVideos = videoDetails => {
+    const {dislikedVideos, likedVideos} = this.state
+    const video = dislikedVideos.find(each => each.id === videoDetails.id)
+    if (video) {
+      const filteredDislikedVideos = dislikedVideos.filter(
+        each => each.id !== videoDetails.id,
+      )
+      this.setState({
+        dislikedVideos: filteredDislikedVideos,
+        // likedVideos: [...likedVideos, videoDetails],
+      })
+    } else {
+      const filteredLikedVideos = likedVideos.filter(
+        each => each.id !== videoDetails.id,
+      )
+      this.setState({
+        dislikedVideos: [...dislikedVideos, videoDetails],
+        likedVideos: filteredLikedVideos,
+      })
+    }
+  }
+
+  updateSavedVideos = videoDetails => {
+    const {savedVideos} = this.state
+    const video = savedVideos.find(each => each.id === videoDetails.id)
+    if (video) {
+      const filteredSavedVideos = savedVideos.filter(
+        each => each.id !== videoDetails.id,
+      )
+      this.setState({savedVideos: filteredSavedVideos})
+    } else {
+      this.setState({
+        savedVideos: [...savedVideos, videoDetails],
+      })
+    }
+  }
+
   render() {
-    const {isDarkTheme} = this.state
+    const {isDarkTheme, likedVideos, dislikedVideos, savedVideos} = this.state
     return (
       <NxtWatchContext.Provider
-        value={{isDarkTheme, changeTheme: this.changeTheme}}
+        value={{
+          isDarkTheme,
+          changeTheme: this.changeTheme,
+          likedVideos,
+          updateLikedVideos: this.updateLikedVideos,
+          dislikedVideos,
+          updateDislikedVideos: this.updateDislikedVideos,
+          savedVideos,
+          updateSavedVideos: this.updateSavedVideos,
+        }}
       >
         <Switch>
           <Route exact path="/login" component={LoginForm} />

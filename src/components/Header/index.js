@@ -1,4 +1,6 @@
+import {withRouter} from 'react-router-dom'
 import Popup from 'reactjs-popup'
+import Cookies from 'js-cookie'
 import {FiLogOut} from 'react-icons/fi'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {HiMoon, HiOutlineSun} from 'react-icons/hi'
@@ -9,7 +11,9 @@ import {
   HomeLinkLogo,
   HomeNavLink,
   MobileNavbarControlsContainer,
+  DesktopNavbarControlsContainer,
   ThemeButton,
+  ProfileImage,
   NavBarLinksListItem,
   MobilePopupMenuIconContainer,
   MobilePopupTriggerButton,
@@ -17,6 +21,14 @@ import {
   PopupCloseButton,
   PopupCloseButtonContainer,
   PopupNavLinksContainer,
+  MobilePopupLogoutContainer,
+  DesktopPopupLogoutContainer,
+  MobileLogoutButton,
+  DesktopLogoutButton,
+  PopupLogoutCardContainer,
+  LogoutText,
+  LogoutButtonsContainer,
+  LogoutButton,
 } from './styledComponents'
 import NavLinks from '../NavLinks'
 
@@ -24,12 +36,33 @@ let darkTheme
 let themeIcon
 let onChangeTheme
 
-const Header = () => {
+const Header = props => {
   const renderThemeIcon = () => (
     <ThemeButton data-testid="theme" onClick={() => onChangeTheme()}>
       {themeIcon}
     </ThemeButton>
   )
+
+  const popupLogout = close => {
+    const onClickConfirm = () => {
+      const {history} = props
+      Cookies.remove('jwt_token')
+      history.replace('/login')
+    }
+    return (
+      <PopupLogoutCardContainer fontColor={darkTheme}>
+        <LogoutText fontColor={darkTheme}>
+          Are you sure, you want to logout?
+        </LogoutText>
+        <LogoutButtonsContainer fontColor={darkTheme}>
+          <LogoutButton outLine onClick={() => close()}>
+            Cancel
+          </LogoutButton>
+          <LogoutButton onClick={onClickConfirm}>Confirm</LogoutButton>
+        </LogoutButtonsContainer>
+      </PopupLogoutCardContainer>
+    )
+  }
 
   const mobileNavBarControls = () => {
     const mobilePopupMenu = () => {
@@ -66,31 +99,18 @@ const Header = () => {
     }
 
     const mobilePopupLogout = () => (
-      <div className="popup-container">
+      <MobilePopupLogoutContainer className="popup-container">
         <Popup
           modal
           trigger={
-            <button type="button" className="trigger-button">
+            <MobileLogoutButton type="button" fontColor={darkTheme}>
               <FiLogOut />
-            </button>
+            </MobileLogoutButton>
           }
         >
-          {close => (
-            <>
-              <div>
-                <p>React is a popular and widely used programming language</p>
-              </div>
-              <button
-                type="button"
-                className="trigger-button"
-                onClick={() => close()}
-              >
-                Close
-              </button>
-            </>
-          )}
+          {close => popupLogout(close)}
         </Popup>
-      </div>
+      </MobilePopupLogoutContainer>
     )
 
     return (
@@ -99,6 +119,38 @@ const Header = () => {
         <NavBarLinksListItem>{mobilePopupMenu()}</NavBarLinksListItem>
         <NavBarLinksListItem>{mobilePopupLogout()}</NavBarLinksListItem>
       </MobileNavbarControlsContainer>
+    )
+  }
+
+  const desktopNavBarControls = () => {
+    const renderProfileImage = () => (
+      <ProfileImage
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+        alt="profile"
+      />
+    )
+
+    const desktopPopupLogout = () => (
+      <DesktopPopupLogoutContainer className="popup-container">
+        <Popup
+          modal
+          trigger={
+            <DesktopLogoutButton type="button" brColor={darkTheme}>
+              Logout
+            </DesktopLogoutButton>
+          }
+        >
+          {close => popupLogout(close)}
+        </Popup>
+      </DesktopPopupLogoutContainer>
+    )
+
+    return (
+      <DesktopNavbarControlsContainer>
+        <NavBarLinksListItem>{renderThemeIcon()}</NavBarLinksListItem>
+        <NavBarLinksListItem>{renderProfileImage()}</NavBarLinksListItem>
+        <NavBarLinksListItem>{desktopPopupLogout()}</NavBarLinksListItem>
+      </DesktopNavbarControlsContainer>
     )
   }
   return (
@@ -122,10 +174,11 @@ const Header = () => {
               <HomeLinkLogo src={websiteLogo} alt="website logo" />
             </HomeNavLink>
             {mobileNavBarControls()}
+            {desktopNavBarControls()}
           </NavBarContainer>
         )
       }}
     </NxtWatchContext.Consumer>
   )
 }
-export default Header
+export default withRouter(Header)

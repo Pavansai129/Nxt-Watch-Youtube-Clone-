@@ -19,9 +19,13 @@ export const NavLink = styled(Link)`
   align-items: center;
   height: 100%;
   width: 180px;
+  border-radius: 5px;
   font-size: 20px;
   font-weight: 500;
   color: ${props => props.iconcolor};
+  @media screen and (min-width: 768px) {
+    width: 90%;
+  }
 `
 export const NavLinkName = styled.p`
   display: flex;
