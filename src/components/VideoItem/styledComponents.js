@@ -2,9 +2,15 @@ import styled from 'styled-components'
 
 export const VideoItemCard = styled.li`
   width: 100%;
+  flex-shrink: 0;
   margin-bottom: 10px;
+  @media screen and (min-width: 576px) {
+    width: 40%;
+    margin-right: 10px;
+    flex-grow: 1;
+  }
   @media screen and (min-width: 768px) {
-    width: 300px;
+    width: 30%;
     margin-right: 10px;
     flex-grow: 1;
   }
@@ -15,7 +21,7 @@ export const VideoItemContainer = styled.div`
   flex-direction: column;
   width: 100%;
   @media screen and (min-width: 768px) {
-    width: 300px;
+    width: 100%;
   }
 `
 export const VideoItemThumbnailImage = styled.img`
@@ -51,23 +57,22 @@ export const VideoTitle = styled.p`
   line-height: 1.2;
   margin-bottom: 10px;
   @media screen and (min-width: 768px) {
-    font-size: 16px;
+    font-size: 10px;
   }
 `
 export const NameViewsPublishedContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
   @media screen and (min-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
+    column-gap: 10px;
   }
 `
 export const ViewsPublishedContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 10px;
 `
 
 export const DotContainer = styled.div`
@@ -80,22 +85,22 @@ export const DotContainer = styled.div`
 `
 
 export const ChannelName = styled.p`
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 300px;
   color: ${props => (props.fontColor ? '#475569' : ' #616e7c')};
   background: none;
   @media screen and (min-width: 768px) {
-    font-size: 14px;
+    font-size: 8px;
     width: 100%;
     margin-bottom: 5px;
   }
 `
 export const VideoDataText = styled.p`
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 300px;
   color: ${props => (props.fontColor ? '#475569' : ' #616e7c')};
   background: none;
   @media screen and (min-width: 768px) {
-    font-size: 14px;
+    font-size: 8px;
   }
 `

@@ -116,15 +116,24 @@ export const DesktopLogoutButton = styled.button`
 `
 
 export const PopupLogoutCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: auto;
-  padding: 10px 20px 10px 20px;
+  padding: 20px 30px;
   border-radius: 5px;
   background-color: ${props => (props.fontColor ? '#181818' : '#ffffff')};
   box-shadow: 0px 0px 8px ${props => (props.fontColor ? '#ffffff' : '#181818')};
   backdrop-filter: blur(5px);
+  @media screen and (min-width: 567px) {
+    height: 150px;
+    width: 350px;
+    padding: 30px 50px;
+  }
 `
 export const LogoutText = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   margin-bottom: 20px;
   color: ${props => (props.fontColor ? '#ffffff' : '#181818')};
@@ -141,9 +150,9 @@ export const LogoutButton = styled.button`
   font-weight: 500;
   width: 60px;
   height: 30px;
-  color: ${props => (props.outLine ? '#94a3b8' : '#ffffff')};
+  color: ${props => (props.outLine ? '#7e858e' : '#ffffff')};
   background-color: ${props => (props.outLine ? 'transparent' : '#4f46e5')};
-  border: ${props => (props.outLine ? '1px solid #94a3b8' : 'none')};
+  border: ${props => (props.outLine ? '1px solid #7e858e' : 'none')};
   border-radius: 5px;
   outline: none;
 `

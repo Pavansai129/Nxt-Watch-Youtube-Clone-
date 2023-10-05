@@ -41,7 +41,7 @@ export const HomeBannerSection = styled.div`
 export const BannerContentContainer = styled.div`
   border: none;
   width: 100%;
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) {
     width: 50%;
   }
 `
@@ -90,6 +90,9 @@ export const HomeSearchSectionContainer = styled.div`
   padding: 20px;
   border: none;
   background-color: ${props => (props.bgColor ? '#181818' : '#f9f9f9')};
+  @media screen and (min-width: 576px) {
+    width: 75%;
+  }
   @media screen and (min-width: 768px) {
     width: 50%;
   }
@@ -132,10 +135,10 @@ export const HomeVideosContainer = styled.ul`
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  min-width: 100%;
+  width: 100%;
   background-color: ${props => (props.bgColor ? '#181818' : '#f9f9f9')};
-  @media screen and (min-width: 768px) {
-    padding: 20px;
+  @media screen and (min-width: 576px) {
+    padding: 10px;
   }
 `
 export const LoadingViewContainer = styled.div`
