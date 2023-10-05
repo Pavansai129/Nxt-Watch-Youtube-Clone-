@@ -20,6 +20,40 @@ class App extends Component {
     savedVideos: [],
   }
 
+  componentDidMount() {
+    const localSavedVideos = localStorage.getItem('savedVideos')
+    const localLikedVideos = localStorage.getItem('likedVideos')
+    const localDislikedVideos = localStorage.getItem('dislikedVideos')
+    const savedParsedData = JSON.parse(localSavedVideos)
+    const likedParsedData = JSON.parse(localLikedVideos)
+    const dislikedParsedData = JSON.parse(localDislikedVideos)
+
+    if (savedParsedData === null) {
+      this.setState({savedVideos: []})
+    } else {
+      this.setState({savedVideos: savedParsedData})
+    }
+
+    if (likedParsedData === null) {
+      this.setState({likedVideos: []})
+    } else {
+      this.setState({likedVideos: likedParsedData})
+    }
+
+    if (dislikedParsedData === null) {
+      this.setState({dislikedVideos: []})
+    } else {
+      this.setState({dislikedVideos: dislikedParsedData})
+    }
+  }
+
+  componentDidUpdate() {
+    const {savedVideos, likedVideos, dislikedVideos} = this.state
+    localStorage.setItem('savedVideos', JSON.stringify(savedVideos))
+    localStorage.setItem('likedVideos', JSON.stringify(likedVideos))
+    localStorage.setItem('dislikedVideos', JSON.stringify(dislikedVideos))
+  }
+
   changeTheme = () => {
     this.setState(prevState => ({isDarkTheme: !prevState.isDarkTheme}))
   }
