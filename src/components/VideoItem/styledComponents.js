@@ -42,6 +42,10 @@ export const ChannelProfileImage = styled.img`
   width: 40px;
   border-radius: 50%;
   padding: 5px;
+  @media screen and (min-width: 567px) {
+    height: 30px;
+    width: 30px;
+  }
 `
 
 export const VideoDataContainer = styled.div`
